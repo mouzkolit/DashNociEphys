@@ -1,0 +1,33 @@
+body {
+  background-color: #292b2c;
+}
+
+h4 {
+  color: white;
+}
+
+hr {
+  height: 1px;
+  background-color: #ccc;
+  border: none;
+}
+
+.button_grouped {
+  margin-top: 10px;
+  color: grey;
+}
+
+input{
+  border-radius: 5px;
+}
+
+canvas.marks {
+  max-width: 100%!important;
+  height: auto!important;
+}
+
+.jumbotron {
+  background-color: rgba(204, 204, 204, 0.5);
+}
+
+  

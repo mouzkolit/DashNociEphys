@@ -1,0 +1,92 @@
+{% if 'mRNA' in request.path %}
+<div class="jumbotron">
+    <div class="p-3 bg-dark text-white">
+        <h2> iPSC Transcriptomics </h2>
+    </div>
+</div>
+<br>
+
+<div class="Settings">
+    <div class="card bg-dark">
+        <div class="card-header text-white">
+        <a data-bs-toggle="collapse" href="#collapsable_item" aria-expanded="true" aria-controls="collapsable_item">
+            Setup Query
+        </a>
+        </div>
+    <div id="collapsable_item">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="card bg-dark border-secondary text-white">
+                    <div class="card-header bg-secondary text-white" >
+                    Select a gene of interest: 
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'mRNA' %}", method="post", class="form-inline">
+                        {% csrf_token %}
+                        {% block form %}
+                        {{ form }}
+                        <input type = "submit" class="btn btn-primary">
+                        {% endblock form %}
+                        <datalist id="gene_names">
+                        {% for results in gene_names %}
+                            <option value="{{results}}">
+                        {% endfor %}
+                        </datalist>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                {% if draw %}
+                <div class="card bg-dark border-secondary text-white">
+                    <div class="card-header bg-secondary text-white">
+                        Selected Genes:
+                    </div>
+                    <div class="card-body">
+                        <form action="{% url 'mRNA' %}" method="post">
+                        {% csrf_token %}
+                        {% for results in genes_listed %}
+                            <button type = "submit" name = "Gene" id="gene_button" class="btn btn-primary"  value={{results}} and style="background-color:transparent">{{results}}</button>
+                        {% endfor %}
+                        </form>
+                         {%endif%}
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<br>
+<div class="container-fluid">
+<div class="row">
+    <div class="col">
+        <div id="visInteractiveYear" class="vega-embed">
+            <canvas width="1366" id="chart_pl" height="960" class="marks" style="width: 976px; height: 686px;"></canvas>
+        </div>
+        <script type="text/javascript">
+            var plotting = {{ plot|safe }};
+            var opt = {"renderer": "canvas", "actions": false};
+            vegaEmbed("#visInteractiveYear", plotting, opt);
+        </script>
+    </div>
+
+</div>
+    <div class="row">
+        {% for cell in plot_cell %}
+        <div class="col">
+        <div id="cell{{ forloop.counter }}" class="vega-embed">
+            <canvas width="1366" id="chart_pl" height="960" class="marks" style="width: 976px; height: 686px;"></canvas>
+        </div>
+        <script type="text/javascript">
+            var spec = {{ cell|safe }};
+            var opt = {"renderer": "canvas", "actions": false};
+            vegaEmbed("#cell{{ forloop.counter }}", spec, opt);
+        </script>
+    </div>
+        {% endfor %}
+</div>
+</div>
+{% endif %}

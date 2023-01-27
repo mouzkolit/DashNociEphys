@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+    {% load static %} 
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Navbar -->
+    {% block navbar %}
+    {%include 'navbar.html' %}
+    {% endblock navbar %}
+
+    {% block content %}
+    <div class="p-5 text-center bg-image" style="
+    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+    height: 400px;
+    margin-top: 58px;
+    ">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+            <h1 class="mb-3">DashBoard Homepage</h1>
+            <h4 class="mb-3">Welcome to the Mui Physiology Homepage 
+            Here we provide insights in our Team and collected Data!
+            </h4>
+            <a class="btn btn-outline-light btn-lg" href="#!" role="button">Call to action</a>
+        </div>
+        </div>
+    </div>
+    </div>
+    {% endblock content %}
+
+</body>
+</html>

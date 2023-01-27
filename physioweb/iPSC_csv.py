@@ -1,0 +1,67 @@
+from adaptor.model import CsvModel
+from adaptor.fields import CharField, FloatField
+
+from physioweb.models import IpscMrna      
+
+class iPSCCsvModel(CsvModel):
+
+    eneName = CharField(max_length=100)
+    sample_01 = FloatField()
+    sample_02 = FloatField()
+    sample_03 = FloatField()
+    sample_04 = FloatField()
+    sample_05 = FloatField()
+    sample_06 = FloatField()
+    sample_07 = FloatField()
+    sample_08 = FloatField()
+    sample_09 = FloatField()
+    sample_10 = FloatField()
+    sample_11 = FloatField()
+    sample_12 = FloatField()
+    sample_13 = FloatField()
+    sample_14 = FloatField()
+    sample_15 = FloatField()
+    sample_16 = FloatField()
+    sample_17 = FloatField()
+    sample_18 = FloatField()
+    sample_19 = FloatField()
+    sample_20 = FloatField()
+    sample_21 = FloatField()
+    sample_22 = FloatField()
+    sample_23 = FloatField()
+    sample_24 = FloatField()
+    sample_25 = FloatField()
+    sample_26 = FloatField()
+    sample_27 = FloatField()
+    sample_28 = FloatField()
+    sample_29 = FloatField()
+    sample_30 = FloatField()
+    sample_31 = FloatField()
+    sample_32 = FloatField()
+    sample_33 = FloatField()
+    sample_34 = FloatField()
+    sample_35 = FloatField()
+    sample_36 = FloatField()
+    sample_37 = FloatField()
+    sample_38 = FloatField()
+    sample_39 = FloatField()
+    sample_40 = FloatField()
+    sample_41 = FloatField()
+    sample_42 = FloatField()
+    sample_43 = FloatField()
+    sample_44 = FloatField()
+    sample_45 = FloatField()
+    sample_46 = FloatField()
+    sample_47 = FloatField()
+    sample_48 = FloatField()
+    sample_49 = FloatField()
+    sample_50 = FloatField()
+    sample_51 = FloatField()
+    sample_52 = FloatField()
+    sample_53 = FloatField()
+    sample_54 = FloatField()
+    
+    class Meta:
+        dbModel = IpscMrna
+        delimiter = ";"
+        has_header = True
