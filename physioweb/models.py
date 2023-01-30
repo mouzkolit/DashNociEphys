@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    """_summary_
+    """_summary_: DB Model for the accepted Users
 
     Args:
         models (_type_): _description_
@@ -20,7 +20,7 @@ class GeneMapHuman(models.Model):
     """Create the database model to map genes and ensembl IDs for human
 
     Args:
-        models (model): Database Model Django
+        models (model): Orthology Mapping DB Model
     """
     ensembl = models.CharField(max_length= 200)
     gene_symbol = models.CharField(max_length=200)
@@ -31,10 +31,10 @@ class GeneMapHuman(models.Model):
     
 
 class IpscMrna(models.Model):
-    """_summary_
+    """_summary_: Represents the model for the RNA sequencing Data
 
     Args:
-        models (_type_): _description_
+        models (models.Model): Django Model Clase
     """
     GeneName = models.CharField(max_length=100)
     sample_01 = models.FloatField()

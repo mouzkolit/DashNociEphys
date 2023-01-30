@@ -24,6 +24,12 @@ class DashBoardView(TemplateView):
 
 
 class mRNAView(TemplateView):
+    """_summary_: Creates the View for the mRNA Section in the DashBoard
+
+    Args:
+        TemplateView (TemplateView): Class TemplateView
+
+    """
     
     template_name = "dashboard.html"
     success_url = '/mRNA'
@@ -48,7 +54,6 @@ class mRNAView(TemplateView):
             render: The mRNA template with the form (input gene) and the genes_list for autosuggestions
         """
         form = self.form_class
-        print(form.errors)
         gene_names = self.get_genes()
         self.gene_names.extend(gene_names)
         
@@ -64,8 +69,7 @@ class mRNAView(TemplateView):
         """
         gene_names= GeneMapHuman.objects.values_list("gene_symbol")
         gene_names = list(gene_names)
-        gene_names = [i[0] for i in gene_names]
-        return gene_names
+        return [i[0] for i in gene_names]
         
     
     def post(self, request, *args, **kwargs):
@@ -79,34 +83,30 @@ class mRNAView(TemplateView):
         """
         form = self.form_class
         form_value = self.form_class(request.POST)    
-        
+
         if form_value.is_valid():
             gene = form_value.cleaned_data["gene_name"].split(" ")
             self.add_list.extend(gene)
-            trajectory_df = self.search_gene_database()
-            fig = self.get_dataframe_figures(trajectory_df)
-            return render(request, self.template_name, {'form': form,
-                                                    "gene_names": self.gene_names,
-                                                    "genes_listed": self.add_list,
-                                                    "plot": fig[0],
-                                                    "plot_cell":fig[1:],
-                                                    "draw": True})
-            
+            return self.draw_figure_from_trajectory(request, form)
+        
         if request.POST["Gene"]:
             self.add_list.remove(request.POST["Gene"])
             if len(self.add_list) > 0:
-                trajectory_df = self.search_gene_database()
-                fig = self.get_dataframe_figures(trajectory_df)
-                return render(request, self.template_name, {'form': form,
-                                                        "gene_names": self.gene_names,
-                                                        "genes_listed": self.add_list,
-                                                        "plot": fig[0],
-                                                        "plot_cell":fig[1:],
-                                                        "draw": True})
+                return self.draw_figure_from_trajectory(request, form)
             else:
                 return render(request, self.template_name, {'form': form,
                                                     "gene_names": self.gene_names,
                                                     "genes_listed": self.add_list})
+
+    # TODO Rename this here and in `post`
+    def draw_figure_from_trajectory(self, request, form):
+        trajectory_df = self.search_gene_database()
+        fig = self.get_dataframe_figures(trajectory_df)
+        return render(request, self.template_name, {'form': form,
+                                                "gene_names": self.gene_names,
+                                                "genes_listed": self.add_list,
+                                                "plot_cell":fig,
+                                                "draw": True})
                 
      
      
@@ -119,15 +119,16 @@ class mRNAView(TemplateView):
         Returns:
             _type_: _description_
         """
-        ad3_traj = trajectory_df[trajectory_df["Cellline"] == "AD3"]
+        ad3_traj = trajectory_df[trajectory_df["Cellline"] == "AD3"] # preselect the celline clone
         ad2_traj = trajectory_df[trajectory_df["Cellline"] == "AD2"]
         traj_840 = trajectory_df[trajectory_df["Cellline"] == "840"]
+        
         fig_all = self.draw_altair_graph(trajectory_df, "Trajectory", 800, 300, "GeneName")
         fig_ad3 = self.draw_altair_graph(ad3_traj, "Trajectory",500,300, "GeneName")
         fig_ad2 = self.draw_altair_graph(ad2_traj, "Trajectory",500,300, "GeneName")
         fig_840 = self.draw_altair_graph(traj_840, "Trajectory",500,300, "GeneName")
         
-        return (fig_all, fig_ad3, fig_ad2, fig_840)
+        return (fig_ad3, fig_ad2, fig_840)
         
                 
             
@@ -164,10 +165,10 @@ class mRNAView(TemplateView):
         final_plot  = final_plot.configure(background="transparent").configure_legend(padding=2,
                                         cornerRadius=5,
                                         orient='bottom',
-                                        labelColor = 'white').configure_axis(grid = False, 
+                                        labelColor = 'black').configure_axis(grid = True, 
                                                                         labelFontSize = 15,
                                                                         gridColor = "#3EB489",
-                                                                        labelColor = "white").configure_view(strokeOpacity = 0)
+                                                                        labelColor = "black").configure_view(strokeOpacity = 0)
                                         
         return final_plot.to_json()
           
@@ -179,17 +180,16 @@ class mRNAView(TemplateView):
             _type_: _description_
         """
         query_set = GeneMapHuman.objects.all().values('ensembl')
+        
+        # check that the gene is inside the selection list
         gene_symbols = query_set.filter(gene_symbol__in =self.add_list)
         gene_symbols_list = gene_symbols.values_list()
         gene_names = [i[1] for i in gene_symbols_list]
-        
+
         query_set = self.database.objects.all().values()
         trajectory = query_set.filter(GeneName__in =gene_names)
-        trajectory_list = trajectory.values_list()
-        
-        if trajectory_list:
-            trajectory_df = self.dictionary_gene_trajectories(trajectory_list)
-            return trajectory_df
+        if trajectory_list := trajectory.values_list():
+            return self.dictionary_gene_trajectories(trajectory_list)
         
     
     def dictionary_gene_trajectories(self, trajectories):
@@ -204,16 +204,25 @@ class mRNAView(TemplateView):
             trajectory_dict["Timepoint"].extend(self.columns)
             trajectory_dict["Trajectory"].extend(stats.zscore(gene[2:]))
             trajectory_dict["Cellline"].extend(self.cellline)
-        trajectory_df = pd.DataFrame(trajectory_dict)
-        return trajectory_df
+        return pd.DataFrame(trajectory_dict)
     
 class HomeView(TemplateView):
+    """_summary_: This creates the view for the Index Page
+
+    Args:
+        TemplateView (TemplateView): _description_
+    """
+    template_name = "index.html"
+    
+    
+class EphysDash(TemplateView):
     """_summary_
 
     Args:
         TemplateView (_type_): _description_
     """
-    template_name = "index.html"
+    print("returns the ephys dashboard")
+    template_name = "ephys_dashbord.html"
     
 
     
