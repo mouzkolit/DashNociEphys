@@ -8,7 +8,20 @@ a{
     color: black;
 }
 
-.container-fluid {
+.container-fluid{
     overflow: hidden;
     margin-left: 0;
   }
+
+img{
+border-radius: 1%;
+}
+
+.list-group-item{
+    background-color: #e3f2fd;
+    margin-left: 0;
+}
+
+.sidebar{
+    background-color:#e3f2fd;
+}

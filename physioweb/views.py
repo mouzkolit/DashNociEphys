@@ -226,6 +226,10 @@ class EphysDash(TemplateView):
     description_temp = {
         "description":"description_biophys.html"
     }
+    navigation_men = {
+        "description":["General Information", "How to Install?"]
+    }
+    
     template_desc = None
     
     def get(self, request, *args, **kwargs):
@@ -237,7 +241,8 @@ class EphysDash(TemplateView):
             render_desc = True
         return render(request, self.template_name, {"template_docu":self.template_desc,
                                                     "render_temp": render_desc,
-                                                    "title":request.GET.get("name")})
+                                                    "title":request.GET.get("name"),
+                                                    "content": self.navigation_men.get(request.GET.get("name"))})
     
 
     

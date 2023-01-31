@@ -7,37 +7,36 @@
 <div class="card-header text-dark">
 Ephys Menu:
 </div>
-<div class="card-body">
-<nav class="menu">
+<div class="card-body text-start text-left ml-0">
+<br>
+<h4> Main Menu </h4>
+<hr>
+<nav class="sidebar">
     <ol>
-        <li class="menu-item"><a href="{% url 'ephys' %}?name=description" >Description <a/></li>
-        <li class="menu-item"><a href="#0">How to install</a></li>
-        <li class="menu-item">
-            <a href="#0">Offline Analysis</a>
-            <ol class="sub-menu">
-                <li class="menu-item"><a href="#0">Load Data</a></li>
-                <li class="menu-item"><a href="#0">Preprocess Data</a></li>
-                <li class="menu-item"><a href="#0">Analyze Data</a></li>
-                <li class="menu-item"><a href="#0">Save Data</a></li>
-            </ol>
-        </li>
-        <li class="menu-item">
-            <a href="#0">Batch Communication</a>
-            <ol class="sub-menu">
-                <li class="menu-item"><a href="#0">Connect to PatchMaster</a></li>
-                <li class="menu-item"><a href="#0">Add Configuration Files</a></li>
-                <li class="menu-item"><a href="#0">Camera Module</a></li>
-            </ol>
-        </li>
-        <li class="menu-item">
-            <a href="#0">Database Viewer</a>
-            <ol class="sub-menu">
-                <li class="menu-item"><a href="#0">Database Scheme</a></li>
-                <li class="menu-item"><a href="#0">Database Options</a></li>
-                <li class="menu-item"><a href="#0">Online Connections</a></li>
-            </ol>
-        </li>
-        <li class="menu-item"><a href="#0">Contact</a></li>
+        <div class="list-group list-group-flush">
+            <a href="{% url 'ephys' %}?name=description" class="list-group-item list-group-item-action" aria-current="true">
+              Description
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">Database Structure</a>
+            <a href="#" class="list-group-item list-group-item-action">Batch Communication</a>
+            <a href="#" class="list-group-item list-group-item-action">Online Analysis</a>
+            <a href="#" class="list-group-item list-group-item-action">Offline Analysis</a>
+            <a href="#" class="list-group-item list-group-item-action">Database Viewer</a>
+          </div>
+
+    </ol>
+</nav>  
+<br>
+{%if render_temp %}
+<h4>Content: </h4>
+<hr>
+<nav class="sidebar">
+    <ol>
+        <div class="list-group list-group-flush">  
+        {% for results in content %}
+        <a href="#" class="list-group-item list-group-item-action">{{results}}</a>
+        {% endfor %}
+        </div>
     </ol>
 </nav>  
 </div>
@@ -45,7 +44,7 @@ Ephys Menu:
 </div>
 
 
-{%if render_temp %}
+
 <div class="col-9">
     <div class="card" style="background: #e3f2fd;">
         <div class="card-header text-dark">
