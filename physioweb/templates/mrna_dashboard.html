@@ -7,7 +7,7 @@
 <br>
 <hr>
 <div class="Settings">
-    <div class="card bg-light">
+    <div class="card" style="background: #e3f2fd;">
         <div class="card-header text-dark">
         <a data-bs-toggle="collapse" href="#collapsable_item" aria-expanded="true" aria-controls="collapsable_item">
             Setup Query
@@ -17,8 +17,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-4">
-                <div class="card bg-light border-secondary text-dark">
-                    <div class="card-header bg-primary text-dark" >
+                <div class="card" style="background: #e3f2fd;">
+                    <div class="card-header bg-primary text-white" >
                     Select a gene of interest: 
                     </div>
                     <div class="card-body">
@@ -39,8 +39,8 @@
             </div>
             <div class="col-3">
                 {% if draw %}
-                <div class="card bg-light border-secondary text-dark">
-                    <div class="card-header bg-primary text-dark">
+                <div class="card text-white" style="background: #e3f2fd;">
+                    <div class="card-header bg-primary text-white">
                         Selected Genes:
                     </div>
                     <div class="card-body">
@@ -64,7 +64,7 @@
     <div class="row">
         {% for cell in plot_cell %}
         <div class="col">
-            <div class="card bg-light">
+            <div class="card" style="background: #e3f2fd;">
             <div class="card-header bg-primary text-white">
                 Cellline: 
             </div>

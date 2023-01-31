@@ -104,7 +104,7 @@ class mRNAView(TemplateView):
         fig = self.get_dataframe_figures(trajectory_df)
         return render(request, self.template_name, {'form': form,
                                                 "gene_names": self.gene_names,
-                                                "genes_listed": self.add_list,
+                                                "genes_listed": list(set(self.add_list)),
                                                 "plot_cell":fig,
                                                 "draw": True})
                 
@@ -223,6 +223,21 @@ class EphysDash(TemplateView):
     """
     print("returns the ephys dashboard")
     template_name = "ephys_dashbord.html"
+    description_temp = {
+        "description":"description_biophys.html"
+    }
+    template_desc = None
+    
+    def get(self, request, *args, **kwargs):
+        
+        render_desc = False
+        if request.GET.get("name"):
+            print("yeah here we are")
+            self.template_desc = self.description_temp.get(request.GET.get("name"))
+            render_desc = True
+        return render(request, self.template_name, {"template_docu":self.template_desc,
+                                                    "render_temp": render_desc,
+                                                    "title":request.GET.get("name")})
     
 
     

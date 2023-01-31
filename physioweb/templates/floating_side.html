@@ -1,34 +1,63 @@
 
 <br>
+<div class="container-fluid">
+<div class="row">
 <div class="col">
-<div class="card bg-light">
+<div class="card" style="background: #e3f2fd;">
 <div class="card-header text-dark">
 Ephys Menu:
 </div>
-<div class="card-body"
+<div class="card-body">
 <nav class="menu">
-    <header>Biophysical Essentials Documentation<span>×</span></header>
     <ol>
-        <li class="menu-item"><a href="#0"></a> Description </li>
+        <li class="menu-item"><a href="{% url 'ephys' %}?name=description" >Description <a/></li>
         <li class="menu-item"><a href="#0">How to install</a></li>
         <li class="menu-item">
             <a href="#0">Offline Analysis</a>
             <ol class="sub-menu">
-                <li class="menu-item"><a href="#0">Big Widgets</a></li>
-                <li class="menu-item"><a href="#0">Bigger Widgets</a></li>
-                <li class="menu-item"><a href="#0">Huge Widgets</a></li>
+                <li class="menu-item"><a href="#0">Load Data</a></li>
+                <li class="menu-item"><a href="#0">Preprocess Data</a></li>
+                <li class="menu-item"><a href="#0">Analyze Data</a></li>
+                <li class="menu-item"><a href="#0">Save Data</a></li>
             </ol>
         </li>
         <li class="menu-item">
-            <a href="#0">Kabobs</a>
+            <a href="#0">Batch Communication</a>
             <ol class="sub-menu">
-                <li class="menu-item"><a href="#0">Shishkabobs</a></li>
-                <li class="menu-item"><a href="#0">BBQ kabobs</a></li>
-                <li class="menu-item"><a href="#0">Summer kabobs</a></li>
+                <li class="menu-item"><a href="#0">Connect to PatchMaster</a></li>
+                <li class="menu-item"><a href="#0">Add Configuration Files</a></li>
+                <li class="menu-item"><a href="#0">Camera Module</a></li>
+            </ol>
+        </li>
+        <li class="menu-item">
+            <a href="#0">Database Viewer</a>
+            <ol class="sub-menu">
+                <li class="menu-item"><a href="#0">Database Scheme</a></li>
+                <li class="menu-item"><a href="#0">Database Options</a></li>
+                <li class="menu-item"><a href="#0">Online Connections</a></li>
             </ol>
         </li>
         <li class="menu-item"><a href="#0">Contact</a></li>
     </ol>
-</nav> 
+</nav>  
+</div>
+</div>
+</div>
+
+
+{%if render_temp %}
+<div class="col-9">
+    <div class="card" style="background: #e3f2fd;">
+        <div class="card-header text-dark">
+            {{ title }}
+        </div>
+            <div class="card-body">
+                {% block navbar %}
+                {%include template_docu %}
+                {% endblock navbar %}
+</div>
+</div>
+</div>
+{%endif%}
 </div>
 </div>

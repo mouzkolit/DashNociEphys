@@ -1,8 +1,14 @@
 
 .menu-item{
     color: black;
+    margin-top: 10px;
 }
 
 a{
     color: black;
 }
+
+.container-fluid {
+    overflow: hidden;
+    margin-left: 0;
+  }
