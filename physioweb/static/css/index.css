@@ -22,7 +22,6 @@ input {
 }
 
 canvas.marks {
-  max-width: 100% !important;
   height: auto !important;
 }
 
@@ -37,4 +36,10 @@ canvas.marks {
 
 .sidebar {
   background-color: #e3f2fd;
+}
+
+@media (max-width: 576px) {
+  .flex-sm-row {
+    flex-direction: column;
+  }
 }

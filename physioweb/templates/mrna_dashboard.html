@@ -9,16 +9,21 @@
 <div class="Settings">
   <div class="card" style="background: #e3f2fd">
     <div class="card-header text-dark">
-      <a
-        data-bs-toggle="collapse"
-        href="#collapsable_item"
-        aria-expanded="true"
-        aria-controls="collapsable_item"
-      >
-        Setup Query
-      </a>
+      <button
+          class="btn btn-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsable_item"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          Setup Query
+        </button>
     </div>
-    <div id="collapsable_item">
+    <div
+        id="collapsable_item"
+        class="collapse show"
+        aria-labelledby="headingOne"
+      >
       <div class="card-body">
         <div class="row">
           <div class="col-4">
@@ -80,6 +85,8 @@
   </div>
   <hr />
   <br />
+
+  
   <div class="container-fluid">
     <div class="row">
       {% for cell in plot_cell %}
@@ -90,11 +97,8 @@
           <div class="card-body">
             <div id="cell{{ forloop.counter }}" class="vega-embed">
               <canvas
-                width="1366"
                 id="chart_pl"
-                height="960"
                 class="marks"
-                style="width: 976px; height: 686px"
               ></canvas>
             </div>
             <script type="text/javascript">
@@ -109,4 +113,4 @@
     </div>
   </div>
   {% endif %}
-</div>
+  </div>

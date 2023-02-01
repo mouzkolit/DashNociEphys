@@ -124,9 +124,9 @@ class mRNAView(TemplateView):
         traj_840 = trajectory_df[trajectory_df["Cellline"] == "840"]
         
         fig_all = self.draw_altair_graph(trajectory_df, "Trajectory", 800, 300, "GeneName")
-        fig_ad3 = self.draw_altair_graph(ad3_traj, "Trajectory",500,300, "GeneName")
-        fig_ad2 = self.draw_altair_graph(ad2_traj, "Trajectory",500,300, "GeneName")
-        fig_840 = self.draw_altair_graph(traj_840, "Trajectory",500,300, "GeneName")
+        fig_ad3 = self.draw_altair_graph(ad3_traj, "Trajectory",380,200, "GeneName")
+        fig_ad2 = self.draw_altair_graph(ad2_traj, "Trajectory",380,200, "GeneName")
+        fig_840 = self.draw_altair_graph(traj_840, "Trajectory",380,200, "GeneName")
         
         return (fig_ad3, fig_ad2, fig_840)
         
@@ -144,7 +144,7 @@ class mRNAView(TemplateView):
                     alt.Chart(data_draw)
                     .mark_boxplot(size = 30)
                     .encode(x=alt.X("Timepoint"),
-                            y=alt.Y(value, scale=alt.Scale(domain=[data_draw[value].min()-1, data_draw[value].max()+1])),
+                            y=alt.Y(value),
                             color=gene_annotation,
                             )
                     .properties(width=width, height = height)
@@ -155,7 +155,7 @@ class mRNAView(TemplateView):
                 .mark_line(interpolate = "natural")
                 .encode(x=alt.X("Timepoint",
                                 scale=alt.Scale(padding=1)),
-                                y=alt.Y(f"mean({value})",scale=alt.Scale(domain=[data_draw[value].min()-1, data_draw[value].max()+1])),
+                                y=alt.Y(f"mean({value})"),
                                 color=gene_annotation,
                                 )
                 .properties(width=width, height = height)
