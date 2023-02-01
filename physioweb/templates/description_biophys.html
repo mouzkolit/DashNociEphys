@@ -1,5 +1,79 @@
-<a> Welcome to the Biophysical Essential Tool </a>
-<br>
-{% load static %} 
-<img src="{% static "/media/Biophysical_Ess.png" %}" alt="home" width="600" 
-height="500"  />
+<div class="col-9">
+  <div id="accordion">
+    <div class="card" style="background: #e3f2fd">
+      <div class="card-header text-dark">
+        <button
+          class="btn btn-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          {{ title }}
+        </button>
+      </div>
+      <div
+        id="collapseOne"
+        class="collapse show"
+        aria-labelledby="headingOne"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <br />
+          {% load static %}
+          <h2>
+            Biophysical Essentials: A GUI Framework to ease Electrophysiological
+            Analysis
+          </h2>
+          <hr />
+
+          <figure class="text-center">
+            <img src="{% static "/media/Biophysical_Ess.png" %}"
+            class="figure-img img-fluid img-thumbnail" width=400 heights=300/>
+            <figcaption class="figure-caption text-center">
+              Biophysical Essentials Start Screen
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="background: #e3f2fd">
+      <div class="card-header text-dark">
+        <button
+          class="btn btn-link"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseTwo"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          General Information
+        </button>
+      </div>
+      <div
+        id="collapseTwo"
+        class="collapse"
+        aria-labelledby="headingTwo"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <br />
+          {% load static %}
+          <h2>
+            Biophysical Essentials: A GUI Framework to ease Electrophysiological
+            Analysis
+          </h2>
+          <hr />
+
+          <figure class="text-center">
+            <img src="{% static "/media/Biophysical_Ess.png" %}"
+            class="figure-img img-fluid img-thumbnail" width=400 heights=300/>
+            <figcaption class="figure-caption text-center">
+              Biophysical Essentials Start Screen
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

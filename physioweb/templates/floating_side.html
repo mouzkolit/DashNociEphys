@@ -1,62 +1,62 @@
-
-<br>
+<br />
 <div class="container-fluid">
-<div class="row">
-<div class="col">
-<div class="card" style="background: #e3f2fd;">
-<div class="card-header text-dark">
-Ephys Menu:
-</div>
-<div class="card-body text-start text-left ml-0">
-<br>
-<h4> Main Menu </h4>
-<hr>
-<nav class="sidebar">
-    <ol>
-        <div class="list-group list-group-flush">
-            <a href="{% url 'ephys' %}?name=description" class="list-group-item list-group-item-action" aria-current="true">
-              Description
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">Database Structure</a>
-            <a href="#" class="list-group-item list-group-item-action">Batch Communication</a>
-            <a href="#" class="list-group-item list-group-item-action">Online Analysis</a>
-            <a href="#" class="list-group-item list-group-item-action">Offline Analysis</a>
-            <a href="#" class="list-group-item list-group-item-action">Database Viewer</a>
-          </div>
-
-    </ol>
-</nav>  
-<br>
-{%if render_temp %}
-<h4>Content: </h4>
-<hr>
-<nav class="sidebar">
-    <ol>
-        <div class="list-group list-group-flush">  
-        {% for results in content %}
-        <a href="#" class="list-group-item list-group-item-action">{{results}}</a>
-        {% endfor %}
+  <div class="row">
+    <div class="col">
+      <div class="card" style="background: #e3f2fd">
+        <div class="card-header text-dark">Ephys Menu:</div>
+        <div class="card-body text-start text-left ml-0">
+          <br />
+          <h4>Main Menu</h4>
+          <hr />
+          <nav class="sidebar">
+            <ol>
+              <div class="list-group list-group-flush">
+                <a
+                  href="{% url 'ephys' %}?name=description"
+                  class="list-group-item list-group-item-action"
+                  aria-current="true"
+                >
+                  Description
+                </a>
+                <a href="#" class="list-group-item list-group-item-action"
+                  >Database Structure</a
+                >
+                <a href="#" class="list-group-item list-group-item-action"
+                  >Batch Communication</a
+                >
+                <a href="#" class="list-group-item list-group-item-action"
+                  >Online Analysis</a
+                >
+                <a href="#" class="list-group-item list-group-item-action"
+                  >Offline Analysis</a
+                >
+                <a href="#" class="list-group-item list-group-item-action"
+                  >Database Viewer</a
+                >
+              </div>
+            </ol>
+          </nav>
+          <br />
+          {%if render_temp %}
+          <h4>Content:</h4>
+          <hr />
+          <nav class="sidebar">
+            <ol>
+              <div class="list-group list-group-flush">
+                {% for results in content %}
+                <a href="#" class="list-group-item list-group-item-action"
+                  >{{results}}</a
+                >
+                {% endfor %}
+              </div>
+            </ol>
+          </nav>
         </div>
-    </ol>
-</nav>  
-</div>
-</div>
-</div>
-
-
-
-<div class="col-9">
-    <div class="card" style="background: #e3f2fd;">
-        <div class="card-header text-dark">
-            {{ title }}
-        </div>
-            <div class="card-body">
-                {% block navbar %}
-                {%include template_docu %}
-                {% endblock navbar %}
-</div>
-</div>
-</div>
-{%endif%}
-</div>
+      </div>
+    </div>
+    {% block template_desc %} 
+    {%include template_docu %} 
+    {% endblock template_desc %} 
+    {%endif%}
+  </div>
 </div>

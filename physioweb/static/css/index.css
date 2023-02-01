@@ -17,17 +17,24 @@ hr {
   color: grey;
 }
 
-input{
+input {
   border-radius: 5px;
 }
 
 canvas.marks {
-  max-width: 100%!important;
-  height: auto!important;
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 .jumbotron {
   background-color: #e3f2fd;
 }
 
-  
+.list-group-item {
+  background-color: #e3f2fd;
+  margin-left: 0;
+}
+
+.sidebar {
+  background-color: #e3f2fd;
+}
