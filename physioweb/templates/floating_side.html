@@ -18,19 +18,19 @@
                 >
                   Description
                 </a>
-                <a href="#" class="list-group-item list-group-item-action"
+                <a href="{% url 'ephys' %}?name=database" class="list-group-item list-group-item-action"
                   >Database Structure</a
                 >
-                <a href="#" class="list-group-item list-group-item-action"
+                <a href="{% url 'ephys' %}?name=batch" class="list-group-item list-group-item-action"
                   >Batch Communication</a
                 >
-                <a href="#" class="list-group-item list-group-item-action"
+                <a href="{% url 'ephys' %}?name=online" class="list-group-item list-group-item-action"
                   >Online Analysis</a
                 >
-                <a href="#" class="list-group-item list-group-item-action"
+                <a href="{% url 'ephys' %}?name=offline" class="list-group-item list-group-item-action"
                   >Offline Analysis</a
                 >
-                <a href="#" class="list-group-item list-group-item-action"
+                <a href="{% url 'ephys' %}?name=viewer" class="list-group-item list-group-item-action"
                   >Database Viewer</a
                 >
               </div>
@@ -54,6 +54,7 @@
         </div>
       </div>
     </div>
+  
     {% block template_desc %} 
     {%include template_docu %} 
     {% endblock template_desc %} 

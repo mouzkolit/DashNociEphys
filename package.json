@@ -1,0 +1,22 @@
+{
+  "name": "dash_physio",
+  "version": "1.0.0",
+  "description": "webpage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mouzkolit/DashNociEphys.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mouzkolit/DashNociEphys/issues"
+  },
+  "homepage": "https://github.com/mouzkolit/DashNociEphys#readme",
+  "dependencies": {
+    "chart.js": "^4.2.0"
+  }
+}

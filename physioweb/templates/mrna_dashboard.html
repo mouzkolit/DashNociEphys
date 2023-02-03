@@ -54,6 +54,10 @@
           </div>
           <div class="col-3">
             {% if draw %}
+            {% load static %} 
+            <script type="module" src={% static "java/chart.js" %} defer></script>
+            {{ data_df|json_script:"mydata" }}
+            
             <div class="card text-white" style="background: #e3f2fd">
               <div class="card-header bg-primary text-white">
                 Selected Genes:

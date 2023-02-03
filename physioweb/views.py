@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.middleware.csrf import get_token
 from django.template.loader import render_to_string
 import scipy.stats as stats
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 class DashBoardView(TemplateView):
@@ -102,13 +104,15 @@ class mRNAView(TemplateView):
     def draw_figure_from_trajectory(self, request, form):
         trajectory_df = self.search_gene_database()
         fig = self.get_dataframe_figures(trajectory_df)
+        json_df = trajectory_df.to_dict(orient='list')
+        json_df = json.dumps(json_df, cls = DjangoJSONEncoder)
         return render(request, self.template_name, {'form': form,
                                                 "gene_names": self.gene_names,
                                                 "genes_listed": list(set(self.add_list)),
                                                 "plot_cell":fig,
-                                                "draw": True})
+                                                "draw": True,
+                                                "data_df": json_df})
                 
-     
      
     def get_dataframe_figures(self, trajectory_df):
         """Get DataFrame 
@@ -227,7 +231,12 @@ class EphysDash(TemplateView):
         "description":"description_biophys.html"
     }
     navigation_men = {
-        "description":["General Information", "How to Install?"]
+        "description":["General Information", "How to Install?"],
+        "database": ["Database Scheme","How to query"],
+        "online": ["How to: Online Analysis", "Labbook", "Database Transfer"],
+        "batch": ["Connect to Patchmaster", "Set Metadata","Record Experiment","Camera Module"],
+        "offline": ["General Description","Load Data","Select Metadata","Preprocess Data","Analyse Data","Plots/Tables"],
+        "viewer": ["How to use: Database Viewer", "Query Data", "Export Table"]
     }
     
     template_desc = None
@@ -237,11 +246,10 @@ class EphysDash(TemplateView):
         render_desc = False
         if request.GET.get("name"):
             print("yeah here we are")
-            self.template_desc = self.description_temp.get(request.GET.get("name"))
+            self.template_desc = self.description_temp.get("description")
             render_desc = True
         return render(request, self.template_name, {"template_docu":self.template_desc,
                                                     "render_temp": render_desc,
-                                                    "title":request.GET.get("name"),
                                                     "content": self.navigation_men.get(request.GET.get("name"))})
     
 

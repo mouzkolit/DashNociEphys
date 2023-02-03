@@ -1,23 +1,33 @@
 <div class="col-9">
   <div id="accordion">
+    {% for title in content %}
     <div class="card text-start text-left ml-0" style="background: #e3f2fd">
       <div class="card-header text-dark">
         <button
           class="btn btn-link"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
+          data-bs-target="#collapseOne{{ forloop.counter }}"
           aria-expanded="true"
           aria-controls="collapseOne"
         >
           {{ title }}
         </button>
       </div>
+      {% if forloop.first %}
       <div
-        id="collapseOne"
+        id="collapseOne{{ forloop.counter }}"  
         class="collapse show"
         aria-labelledby="headingOne"
         data-parent="#accordion"
       >
+      {% else %}
+      <div
+        id="collapseOne{{ forloop.counter }}"  
+        class="collapse"
+        aria-labelledby="headingOne"
+        data-parent="#accordion"
+      >
+      {% endif %}
         <div class="card-body bg-light">
           <br />
           {% load static %}
@@ -38,42 +48,5 @@
       </div>
     </div>
     <hr>
-    <div class="card text-start text-left ml-0" style="background: #e3f2fd">
-      <div class="card-header text-dark">
-        <button
-          class="btn btn-link"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseTwo"
-          aria-expanded="true"
-          aria-controls="collapseOne"
-        >
-          General Information
-        </button>
-      </div>
-      <div
-        id="collapseTwo"
-        class="collapse"
-        aria-labelledby="headingTwo"
-        data-parent="#accordion"
-      >
-        <div class="card-body bg-light">
-          <br />
-          {% load static %}
-          <h2>
-            Biophysical Essentials: A GUI Framework to ease Electrophysiological
-            Analysis
-          </h2>
-          <hr />
-
-          <figure class="text-center">
-            <img src="{% static "/media/Biophysical_Ess.png" %}"
-            class="figure-img img-fluid img-thumbnail" width=400 heights=300/>
-            <figcaption class="figure-caption text-center">
-              Biophysical Essentials Start Screen
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    {% endfor %}
+   
