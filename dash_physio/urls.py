@@ -15,12 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from physioweb.views import DashBoardView, HomeView, mRNAView, EphysDash
+
 
 urlpatterns = [
-    path('',  HomeView.as_view(), name='index'),
-    path('dashboard/', DashBoardView.as_view(), name='dashboard'),
-    path('dashboard/mRNA', mRNAView.as_view(), name='mRNA'),
     path('admin/', admin.site.urls),
-    path('ephys/', EphysDash.as_view(), name ='ephys' )
+    path('', include('physioweb.urls'))
 ]

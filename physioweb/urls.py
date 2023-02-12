@@ -1,7 +1,10 @@
 from django.urls import path
 
-from . import views
+from physioweb.views import DashBoardView, HomeView, mRNAView, EphysDash
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('',  HomeView.as_view(), name='index'),
+    path('dashboard/', DashBoardView.as_view(), name='dashboard'),
+    path('dashboard/mRNA', mRNAView.as_view(), name='mRNA'),
+    path('ephys/', EphysDash.as_view(), name ='ephys' )
 ]
