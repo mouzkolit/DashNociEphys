@@ -64,10 +64,10 @@ class mRNAView(TemplateView):
                                                     "genes_listed": self.add_list})
         
     def get_genes(self):
-        """_summary_
+        """_summary_: Retrieves the list of gene names for the datalist
 
         Returns:
-            _type_: _description_
+            list: returns a list holding all genes
         """
         gene_names= GeneMapHuman.objects.values_list("gene_symbol")
         gene_names = list(gene_names)
@@ -75,13 +75,14 @@ class mRNAView(TemplateView):
         
     
     def post(self, request, *args, **kwargs):
-        """Post Request 
+        """Post Request which is sending holding the queried genes, that will
+        be than represented as Gene
 
         Args:
-            request (_type_): 
+            request (requests.request): 
 
         Returns:
-            _type_: _description_
+            render[dict]: The html file holding the dashboard
         """
         form = self.form_class
         form_value = self.form_class(request.POST)    
@@ -118,7 +119,8 @@ class mRNAView(TemplateView):
         """Get DataFrame 
 
         Args:
-            trajectory_df (_type_): _description_
+            trajectory_df (pd.DataFrame): Holding the vsd count dataframe 
+            with the gene trajectories
 
         Returns:
             _type_: _description_
@@ -135,7 +137,6 @@ class mRNAView(TemplateView):
         return (fig_ad3, fig_ad2, fig_840)
         
                 
-            
     def draw_altair_graph(self,data_draw, value, width, height,  gene_annotation = None):
         """ Draws the trajectories as altair graph
         Args:
